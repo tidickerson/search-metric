@@ -58,9 +58,9 @@ function Upload({ searchTerm, setMetrics }) {
 
   return (
     <div>
-      <h1>Uploading Files in React</h1>
+      <h1>Upload Search Template</h1>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <button onClick={handleUpload}>Calculate Metrics</button>
       {progress.started && <p>Progress: {progress.pc}%</p>}
       {msg && <p>{msg}</p>}
     </div>

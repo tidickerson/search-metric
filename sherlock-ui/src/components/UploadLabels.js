@@ -60,7 +60,7 @@ function UploadLabels() {
 
   return (
     <div>
-      <h1>Uploading Truth</h1>
+      <h1>Upload Ground Truth Labels</h1>
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload Ground Truth</button>
       {msg && <p>{msg}</p>}

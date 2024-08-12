@@ -6,6 +6,6 @@
     "index_definition": "index_def.json",
     "query_payload_file": "query_payload.json",
     "result_file": "output.json",
-    "key_vault_url": "your_key_vault_url",
-    "secret_name": "your_secret_name"
+    "key_vault_url": "https://tidickerson-kv.vault.azure.net/",
+    "secret_name": "apikey"
 }

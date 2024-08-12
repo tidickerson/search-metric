@@ -1,26 +1,12 @@
 import React from 'react';
 import './Sidebar.css';
+import azure_logo from '../assets/azure_logo.png'; 
 
 function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="logo">
-        <nav>
-          <ul>
-            <li>
-              <a href="#">Parameters</a>
-            </li>
-            <li>
-              <a href="#">Search History</a>
-            </li>
-            <li>
-              <a href="#">Create Index</a>
-            </li>
-            <li>
-              <a href="#">Index Documents</a>
-            </li>
-          </ul>
-        </nav>
+      <img src={azure_logo} alt="Azure Logo" className="logo-image" />
       </div>
     </aside>
   );

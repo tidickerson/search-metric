@@ -1,6 +1,6 @@
 .sidebar {
     width: 250px;
-    background-color: #0078d7;
+    background-color: #1284e1;
     color: white;
     display: flex;
     flex-direction: column;
@@ -24,4 +24,11 @@
     color: white;
     text-decoration: none;
     font-size: 18px;
+}
+
+.logo-image{
+    margin-top: 20px;
+    width: 100px;
+    height: auto;
+
 }
