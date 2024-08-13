@@ -148,12 +148,11 @@ def search_advanced():
         payload = query_payload.copy()
         #assign to the values of the provided fields which will be null 
         payload['document_id'] = key
-        payload['search'] = values
-        #wrap in a list to prep for dataframe
 
         payload_str = json.dumps(payload)
         payload_str = payload_str.replace("#search#", values)
         payload = json.loads(payload_str)
+        print(payload)
     
         # Wrap in a list to prep for dataframe
         query_payload_list = [payload]
@@ -166,7 +165,7 @@ def search_advanced():
         results = ss.get_search_results(dict_expanded, index)
 
         #evaluate the information
-        ndcg,precision = evaluate(results,qrels_dict)
+        ndcg,recall,precision = evaluate(results,qrels_dict)
 
         #cumulate the scores for each metric
         ndcg1 += ndcg['NDCG@1']
