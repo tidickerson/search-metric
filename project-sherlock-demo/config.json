@@ -7,5 +7,6 @@
     "query_payload_file": "query_payload.json",
     "result_file": "output.json",
     "key_vault_url": "https://tidickerson-kv.vault.azure.net/",
-    "secret_name": "apikey"
+    "secret_name": "apikey",
+    "max_workers":2
 }
