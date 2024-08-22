@@ -6,15 +6,13 @@ from concurrent.futures import ThreadPoolExecutor,as_completed
 from flask_cors import CORS
 from azs import retrieve_key,AzureSearch
 from evaluation import calculate_metrics
-
 app = Flask(__name__)
 CORS(app)
 
 
-
 @app.route('/search', methods=['POST'])
 def search_advanced():
-    start_time = time.time()
+
     #get parameters and json template from request
     endpoint = request.args.get('endpoint')
     version = request.args.get('version')
@@ -32,8 +30,12 @@ def search_advanced():
     #iterate through the k,v pair of query id and term
     ndcg1,ndcg5,ndcg10 = 0,0,0
     precision1,precision5,precision10 = 0,0,0
+    #for printing iteration number (debug purposes)
+    
+    #can remove this code if need be, used to measure processing time of all queries
     #grab key to not expose secret
     key = retrieve_key()
+
     # Create an instance of AzureSearch
     ss = AzureSearch(endpoint, key, version, service)
     qrels_dict = json.load(open('qrels_dict.json'))
@@ -43,21 +45,25 @@ def search_advanced():
     metrics_list = []
     for payload in query_payload["requests"]:
         template = payload
-        for query_id,query_term in query_list.items():
-            try:
-                n1,n5,n10,p1,p5,p10 = calculate_metrics(query_id,query_term,template,ss,index,qrels_dict)
-                # Cumulate the scores for each metric
-                ndcg1 += n1
-                ndcg5 += n5
-                ndcg10 += n10
-                            
-                precision1 += p1
-                precision5 += p5
-                precision10 += p10
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
+            futures = {executor.submit(calculate_metrics, query_id, query_term, template, ss, index, qrels_dict): query_id for query_id, query_term in query_list.items()}
+            for future in as_completed(futures):
+                query_id = futures[future]
+                try:
+                    n1,n5,n10,p1,p5,p10 = future.result()
+                    # Cumulate the scores for each metric
+                    ndcg1 += n1
+                    ndcg5 += n5
+                    ndcg10 += n10
                         
-            except Exception as e:
-                print(f"Error processing query {query_id}: {e}")
+                    precision1 += p1
+                    precision5 += p5
+                    precision10 += p10
+                        
+                except Exception as e:
+                    print(f"Error processing query {query_id}: {e}")
 
+            #get length of query list
         num_queries = len(query_list)
 
             #compute average scores for all queries
@@ -82,10 +88,7 @@ def search_advanced():
             "precision": precision
         }
         print(metrics)
-        end_time = time.time()
-        print("requests took ",end_time-start_time)
         metrics_list.append(metrics)
-        print("added to list")
     return jsonify(metrics_list)
 
 #endpoint to upload ground truth values

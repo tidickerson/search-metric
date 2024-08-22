@@ -15,6 +15,7 @@ def evaluate(results, qrels_dict):
 
     return ndcg,recall,precision
 
+#session param
 def calculate_metrics(query_id,query_term,query_payload,ss,index,qrels_dict):
     payload = query_payload.copy()
     #assign to the values of the provided fields which will be null 

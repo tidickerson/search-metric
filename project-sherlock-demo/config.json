@@ -1,12 +1,5 @@
 {
-    "endpoint": "https://tidickerson2",
-    "api_version": "2024-05-01-preview",
-    "service_name": "tidickerson2",
-    "index_name": "test-index1",
-    "index_definition": "index_def.json",
-    "query_payload_file": "query_payload.json",
-    "result_file": "output.json",
     "key_vault_url": "https://tidickerson-kv.vault.azure.net/",
     "secret_name": "apikey",
-    "max_workers":2
+    "max_workers":4
 }

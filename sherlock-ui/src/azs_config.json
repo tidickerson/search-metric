@@ -1,0 +1,7 @@
+{
+    "endpoint": "https://tidickerson2",
+    "api_version": "2024-05-01-preview",
+    "service_name": "tidickerson2",
+    "index_name": "fever-index"
+   
+}

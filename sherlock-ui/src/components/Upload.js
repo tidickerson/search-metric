@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import configData from '../azs_config.json';
 
 function Upload({ searchTerm, setMetrics }) {
   const [file, setFile] = useState(null);
@@ -18,7 +19,16 @@ function Upload({ searchTerm, setMetrics }) {
         // Parse the JSON content from the file
         const jsonContent = JSON.parse(e.target.result); 
         // Upload the modified JSON content
-        axios.post('http://127.0.0.1:5000/search?endpoint=https%3A%2F%2Ftidickerson2&version=2024-05-01-preview&service=tidickerson2&index=fever-index&result_file=output.json', jsonContent, {
+        // Upload the modified JSON content
+        const endpoint = encodeURIComponent(configData.endpoint);
+        const apiVersion = configData.api_version;
+        const serviceName = configData.service_name;
+        const indexName = configData.index_name;
+        const resultFile = configData.result_file;
+
+        
+
+        axios.post(`http://127.0.0.1:5000/search?endpoint=${endpoint}&version=${apiVersion}&service=${serviceName}&index=${indexName}&result_file=${resultFile}`, jsonContent, {
           headers: {
             'Content-Type': 'application/json',
           },

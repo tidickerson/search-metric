@@ -62,7 +62,13 @@ class AzureSearch:
                 continue
             #retrieve the query and run search 
             q = queries[qid]
+            start_time = time.time()
+
             r = self.search(index_name, q)
+            end_time = time.time()
+            response_time = end_time - start_time
+            print(f"Request took {response_time} seconds")
+            #go into the response and look instead
             try:
                 if q['queryType'] == 'semantic':
                 #extract the id and search score and store the score in results with the id as key
@@ -77,17 +83,16 @@ class AzureSearch:
 
 #retrieve key (dont know if the url/secret_name is considered sensitive but i dont think so , can make it a param in request if needed)
 def retrieve_key():
-    start_time = time.time()
+
+
     with open('config.json', 'r') as config_file:
         config = json.load(config_file)
     key_vault_url = config['key_vault_url']
     secret_name = config['secret_name']
-    max_workers = config['max_workers']
 
     client = SecretClient(vault_url=key_vault_url, credential=credential)
     retrieved_secret = client.get_secret(secret_name)
     api_key = retrieved_secret.value
-    end_time = time.time()
     return api_key
     
 def convert_ndarray_to_list(value):
