@@ -1,0 +1,5 @@
+{
+    "key_vault_url": "https://tidickerson-kv.vault.azure.net/",
+    "secret_name": "apikey",
+    "max_workers":4
+}

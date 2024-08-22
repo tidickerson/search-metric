@@ -1,0 +1,17 @@
+main {
+  margin-left: 250px; /* Adjust the margin to match the width of the sidebar */
+  flex-grow: 1;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  gap:40px;
+}
+

@@ -1,0 +1,38 @@
+.results {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.results h1 {
+    margin-top: 0;
+}
+
+.result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.result span {
+    font-size: 18px;
+}
+
+.result .increase {
+    color: green;
+}
+
+.result .decrease {
+    color: red;
+}
+
+.result a {
+    color: #0078d7;
+    text-decoration: none;
+}
+
+.result a:hover {
+    text-decoration: underline;
+}
